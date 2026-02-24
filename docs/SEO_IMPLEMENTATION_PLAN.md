@@ -9,20 +9,18 @@
 ## Table of Contents
 
 1. [Summary of Changes](#1-summary-of-changes)
-2. [File 1: src/app/sitemap.ts](#2-file-1-srcappsitemats)
-3. [File 2: src/app/robots.ts](#3-file-2-srcapprobotsTs)
-4. [File 3: src/app/layout.tsx](#4-file-3-srcapplayouttsx)
-5. [File 4: src/app/page.tsx (Homepage)](#5-file-4-srcappagetsx-homepage)
-6. [File 5: src/app/services/page.tsx](#6-file-5-srcappservicespagetsx)
-7. [File 6: src/app/services/[slug]/page.tsx](#7-file-6-srcappservicesslugpagetsx)
-8. [File 7: src/app/projects/page.tsx](#8-file-7-srcappprojectspagetsx)
-9. [File 8: src/app/team/page.tsx](#9-file-8-srcappteampagetsx)
-10. [File 9: src/app/team/rohith-gopal/page.tsx](#10-file-9-team-profile-pages)
-11. [File 10: src/app/team/chethan-kumar-s/page.tsx](#10-file-9-team-profile-pages)
-12. [File 11: src/app/team/shashank-d/page.tsx](#10-file-9-team-profile-pages)
-13. [File 12: src/app/journey/page.tsx](#11-file-12-srcappjourneypagetsx)
-14. [File 13: src/app/boq/page.tsx](#12-file-13-srcappboqpagetsx)
-15. [Outside Codebase Actions](#13-outside-codebase-actions-client-to-do)
+2. [sitemap.ts — Fix URLs & Add Missing Pages](#2-sitemapTs--fix-urls--add-missing-pages)
+3. [robots.ts — Fix Sitemap URL](#3-robotsts--fix-sitemap-url)
+4. [layout.tsx — Fix URLs, og:image & JSON-LD](#4-layouttsx--fix-urls-ogimage--json-ld)
+5. [Homepage — Add Metadata](#5-homepage--add-metadata)
+6. [Services Page — Add Metadata](#6-services-page--add-metadata)
+7. [Service Slug Pages — generateMetadata & JSON-LD](#7-service-slug-pages--generatemetadata--json-ld)
+8. [Projects Page — Add Metadata Layout](#8-projects-page--add-metadata-layout)
+9. [Team Page — Add Metadata](#9-team-page--add-metadata)
+10. [Team Profile Pages — Metadata & Person JSON-LD](#10-team-profile-pages--metadata--person-json-ld)
+11. [Journey Page — Add Metadata](#11-journey-page--add-metadata)
+12. [BOQ Page — Add Metadata](#12-boq-page--add-metadata)
+13. [Outside Codebase Actions](#13-outside-codebase-actions-client-to-do)
 
 ---
 
@@ -49,7 +47,9 @@
 
 ---
 
-## 2. File 1: src/app/sitemap.ts
+## 2. sitemap.ts — Fix URLs & Add Missing Pages
+
+**File:** `src/app/sitemap.ts`
 
 ### Current State
 Only 5 URLs are in the sitemap. Missing: `/journey`, all 7 service subpages, all 3 team profile pages.
@@ -106,7 +106,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
 ---
 
-## 3. File 2: src/app/robots.ts
+## 3. robots.ts — Fix Sitemap URL
+
+**File:** `src/app/robots.ts`
 
 ### Current State
 ```typescript
@@ -122,7 +124,9 @@ sitemap: 'https://arivu-homes.vercel.app/sitemap.xml',  // ← CORRECT URL
 
 ---
 
-## 4. File 3: src/app/layout.tsx
+## 4. layout.tsx — Fix URLs, og:image & JSON-LD
+
+**File:** `src/app/layout.tsx`
 
 ### Current State Issues
 - `openGraph.url` points to `https://arivuhomes.com` (wrong)
@@ -211,7 +215,9 @@ const jsonLd = {
 
 ---
 
-## 5. File 4: src/app/page.tsx (Homepage)
+## 5. Homepage — Add Metadata
+
+**File:** `src/app/page.tsx`
 
 ### Current State
 No `metadata` export — inherits generic metadata from `layout.tsx`.
@@ -234,7 +240,9 @@ export const metadata: Metadata = {
 
 ---
 
-## 6. File 5: src/app/services/page.tsx
+## 6. Services Page — Add Metadata
+
+**File:** `src/app/services/page.tsx`
 
 ### Current State
 No `metadata` export.
@@ -252,7 +260,9 @@ export const metadata: Metadata = {
 
 ---
 
-## 7. File 6: src/app/services/[slug]/page.tsx
+## 7. Service Slug Pages — generateMetadata & JSON-LD
+
+**File:** `src/app/services/[slug]/page.tsx`
 
 ### Current State
 - No `metadata` export — all 7 service pages show the same generic title
@@ -344,7 +354,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 ---
 
-## 8. File 7: src/app/projects/page.tsx
+## 8. Projects Page — Add Metadata Layout
+
+**Files:** `src/app/projects/layout.tsx` *(new file)* + `src/app/projects/page.tsx`
 
 ### Current State
 The projects page is `"use client"` with `useEffect` data fetching. Google's crawler sees an empty page shell — no project names, locations, or descriptions are visible to search engines.
@@ -377,7 +389,9 @@ export default function ProjectsLayout({ children }: { children: React.ReactNode
 
 ---
 
-## 9. File 8: src/app/team/page.tsx
+## 9. Team Page — Add Metadata
+
+**File:** `src/app/team/page.tsx`
 
 ### Current State
 No `metadata` export.
@@ -395,7 +409,9 @@ export const metadata: Metadata = {
 
 ---
 
-## 10. File 9–11: Team Profile Pages
+## 10. Team Profile Pages — Metadata & Person JSON-LD
+
+**Files:** `src/app/team/rohith-gopal/page.tsx`, `src/app/team/chethan-kumar-s/page.tsx`, `src/app/team/shashank-d/page.tsx`
 
 ### Current State
 All three team profile pages have no `metadata` export and no structured data.
@@ -458,7 +474,9 @@ export const metadata: Metadata = {
 
 ---
 
-## 11. File 12: src/app/journey/page.tsx
+## 11. Journey Page — Add Metadata
+
+**File:** `src/app/journey/page.tsx`
 
 ### Current State
 No `metadata` export. This page is completely missing from the sitemap.
@@ -476,7 +494,9 @@ export const metadata: Metadata = {
 
 ---
 
-## 12. File 13: src/app/boq/page.tsx
+## 12. BOQ Page — Add Metadata
+
+**File:** `src/app/boq/page.tsx`
 
 ### Current State
 No `metadata` export.
