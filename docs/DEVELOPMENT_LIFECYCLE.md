@@ -2,7 +2,7 @@
 
 > **Generated:** February 2026  
 > **Repository:** https://github.com/Rohithg86/arivu-homes  
-> **Live URL:** https://arivu-homes.vercel.app//  
+> **Live URL:** https://arivu-homes.vercel.app/  
 > **Total Commits:** ~90 commits from initial scaffold to current production state
 
 ---
